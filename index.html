@@ -12,26 +12,16 @@
     <script src="cartogram.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/d3.slider.css" media="screen" />
     <script src="lib/d3.slider.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <style type="text/css">
-
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 20px;
-            padding: 0;
-            margin: 0;
-        }
-
         #container {
             width: 1200px;
             margin: 20px auto;
         }
 
         h1 {
-            font-size: 140%;
-            margin: 0 0 15px 0;
+            font-size: 300%;
+            margin: 0 0 30px 0;
             text-align: center;
         }
 
@@ -45,16 +35,13 @@
             
         }
 
-        form, form > * {
-            margin: 0;
-        }
 
         #map-container {
             width: 1200px;
             height: 600px;
             text-align: center;
             position: relative;
-            margin: 20px 0;
+            margin: 0px 0;
         }
 
         #map {
@@ -94,15 +81,15 @@
         #theyear {
             line-height: 0.4em;
             border: 1px;
-            font-size: 4em;
+            font-size: 1em;
             position: absolute;
-            top: 40px;
+            bottom: -12px;
             right: 0px;
         }
 
         #about {
             width: 1200px;
-            margin: 0 0 15px 0;
+            margin: 50px 0 15px 0;
             font-size: .9em;
         }
 
@@ -112,36 +99,137 @@
             right: 0px;
             font-size: 1em;
         }
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+        body {
+            background: white;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+       
+        .container {
+            max-width: 300px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .button-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            width: 450px;
+            margin: 10px auto;
+        }
+
+        .button {
+            border: 0 none;
+            border-radius: 36px;
+            padding: 5px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            color: #fff;
+            text-transform: none;
+            -webkit-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+        .button:hover {
+            opacity: .7;
+        }
+
+        .button.-orange {
+            background: #fdae6b;
+            color: #FFFFFF;
+        }
+
+        .button.-green {
+            background: #a1d99b;
+            color: #FFFFFF;
+        }
+
+        .button.-blue {
+            background: #9ecae1;
+            color: #FFFFFF;
+        }
+
+        .svg .text{
+            font-size: 100px;
+            text-align: center;
+        }
+
+        .axis-container{
+            margin-bottom: 40px;
+        }
+        
+
+        .axis path {
+            fill: none;
+            stroke: #fff;
+            shape-rendering: crispEdges;
+        }
+
+        .axis line {
+            stroke: #000;
+        }
 
     </style>
 </head>
-<body>
+<body onload="window.fullyLoaded=true;">
 <div id="container">
-    <h1>Primary Energy Consumption of the World</h1>
+    <h1>Energy Data of the World</h1>
+    <div class = "button-container">
+       <button onclick="gdpData()" class = "button -orange">   GDP PPP   </button>
+       <button onclick="energyData()" class = "button -blue">Energy Consumption</button>
+       <button onclick="carbonData()" class = "button -green"> CO2 Emission </button>
+    </div>
+
     <div id="map-container">
         
         <svg id="map"></svg>
         <div id="theyear">
             <span></span><br />
-            <input style="position:relative; width:110px" type="range" min="1971" max="2040" value="1971">
+            <input style="position:relative; width:1200px" type="range" min="1971" max="2040" value="1971">
         </div>
         <!--<div id = "slider"></div>-->
+        <div id = "axis-container">
+        </div>
     </div>
-    <div id = "slider"></div>
-    <form>
-        <p>
-            <!--<label>Scale by <select id="field"></select></label>-->
-            <!--<label>in <select id="year"></select></label>-->
-            <!--<span id="status"></span>-->
-        </p>
-    </form>
     <div id="about">
         <h2>About</h2>
         <p>
             This map is produced by Mengyang Lin using d3.js and cartogram.js. The data are from IEA World Energy Outlook 2014 and IEA World Energy Statistics and Balances. The code was adapted from the example provided by shawnbot and jalperin. The color is from colorbrewer.
         </p>
-</div>
-<script src="lib/mycartogram.js"></script>
+     </div>
+    <script src="lib/mycartogram2.js"></script>
+    <script>
+        // hide the form if the browser doesn't do SVG,
+        // (then just let everything else fail)
 
+        if (!document.createElementNS) {
+            document.getElementsByTagName("form")[0].style.display = "none";
+        };
+        energyData();
+    </script>
+    
 </body>
 </html>
