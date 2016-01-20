@@ -73,7 +73,7 @@
         #theyear {
             line-height: 0.4em;
             border: 1px;
-            font-size: 1em;
+            font-size: 1.5em;
             position: absolute;
             bottom: -12px;
             right: 0px;
@@ -199,6 +199,23 @@
 
         }
 
+        #button_reset{
+            border: 0 none;
+            width: 72px;
+            border-radius: 5px;
+            padding: 5px 0px;
+            margin: 0 10px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: none;
+            -webkit-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+            background: #636363;
+            color: #ffffff;
+
+        }
+
         .svg .text{
             font-size: 100px;
             text-align: center;
@@ -227,14 +244,15 @@
 <div id="container">
     <h1>Energy Data of the World</h1>
     <div class = "button-container">
-       <button onclick="populationData()" class = "button -red"> Population </button>
-       <button onclick="gdpData()" class = "button -orange">   GDP PPP   </button>
-       <button onclick="energyData()" class = "button -blue">Energy Consumption</button>
-       <button onclick="carbonData()" class = "button -green"> CO2 Emission </button>
+       <button  class = "button -red"> Population </button>
+       <button  class = "button -orange">   GDP PPP   </button>
+       <button  class = "button -blue">Energy Consumption</button>
+       <button  class = "button -green"> CO2 Emission </button>
     </div> 
 
     	<button id = "button_start"> Start </button>
     	<button id = "button_stop"> Stop </button>
+        <button id = "button_reset"> Reset </button>
     <div id="map-container">
         
         <svg id="map"></svg>
@@ -296,9 +314,9 @@
     <script src="lib/d3.min.js"></script>
     <script src="lib/colorbrewer.js"></script>
     <script src="lib/topojson.js"></script>
-    <script src="cartogram.js"></script>
+    <script src="lib/cartogram.js"></script>
     <script src="lib/d3.geo.projection.v0.min.js" charset="utf-8"></script>
-    <script src="lib/ecarto.js"></script>
+    <script src="lib/test.js"></script>
     <script>
         // hide the form if the browser doesn't do SVG,
         // (then just let everything else fail)
@@ -307,7 +325,7 @@
             document.getElementsByTagName("form")[0].style.display = "none";
         };
         
-        energyData();
+       // energyData();
     </script>
     
 </body>
