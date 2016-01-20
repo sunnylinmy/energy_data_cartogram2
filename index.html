@@ -79,7 +79,7 @@
             right: 0px;
         }
 
-        #about {
+        .contents {
             width: 1200px;
             margin: 50px 0 15px 0;
             font-size: .9em;
@@ -96,28 +96,23 @@
             background: white;
             font-family: 'Roboto', sans-serif;
             display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
-            align-items: center;
             height: 100vh;
         }
 
-       
+
         .container {
             max-width: 300px;
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
+            
             -webkit-box-direction: normal;
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-        }
+        }   
+
 
         .button-container {
             display: -webkit-box;
@@ -146,6 +141,7 @@
             transition: all 100ms ease-in-out;
             width: 150px;
         }
+
         .button:hover {
             opacity: .7;
         }
@@ -170,6 +166,39 @@
         	color: #FFFFFF;
         }
 
+        #button_start{
+            border: 0 none;
+            width: 72px;
+            border-radius: 5px;
+            padding: 5px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: none;
+            -webkit-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+            background: #636363;
+            color: #ffffff;
+        }
+
+        #button_stop{
+        	border: 0 none;
+            width: 72px;
+            border-radius: 5px;
+            padding: 5px 0px;
+            margin: 0 10px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: none;
+            -webkit-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+            background: #636363;
+            color: #ffffff;
+
+        }
+
         .svg .text{
             font-size: 100px;
             text-align: center;
@@ -191,8 +220,10 @@
         }
 
     </style>
+    
 </head>
 <body>
+
 <div id="container">
     <h1>Energy Data of the World</h1>
     <div class = "button-container">
@@ -200,9 +231,10 @@
        <button onclick="gdpData()" class = "button -orange">   GDP PPP   </button>
        <button onclick="energyData()" class = "button -blue">Energy Consumption</button>
        <button onclick="carbonData()" class = "button -green"> CO2 Emission </button>
-       
-    </div>
+    </div> 
 
+    	<button id = "button_start"> Start </button>
+    	<button id = "button_stop"> Stop </button>
     <div id="map-container">
         
         <svg id="map"></svg>
@@ -210,11 +242,22 @@
             <span></span><br />
             <input style="position:relative; width:1200px" type="range" min="1971" max="2040" value="1971">
         </div>
-        <!--<div id = "slider"></div>-->
+        <!--<div id = "slider"> -webkit-box-orient: vertical; </div>-->
         <div id = "axis-container">
         </div>
     </div>
-    <div id="about">
+
+    <div class="contents" id="Instructions">
+    	<p>Instructions: Click on the timeline to switch between different years. Click "Start" to start animation and click "Stop" to stop animation. Use category buttons to see different data. </p>
+    </div>
+
+    <div class="contents" id="Cartogram_explanation">
+    	<h2>Cartogram</h2>
+    	<p>
+    		
+    	</p>
+    </div>
+    <div class="contents">
         <h2>About</h2>
         <p>
             This map is produced by Mengyang Lin using d3.js and cartogram.js. The data are from IEA World Energy Outlook 2014 and IEA World Energy Statistics and Balances. The code was adapted from the example provided by shawnbot and jalperin. The color is from colorbrewer.
