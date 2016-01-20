@@ -261,30 +261,30 @@
     	</p>
     	<p>
     		For each polygon <br>
-    		&nbsp;&nbsp;Read and store PolygonValue (negative value illegal)<br>
-    		&nbsp;&nbsp;Sum PolygonValue into TotalValue<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Read and store PolygonValue (negative value illegal)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum PolygonValue into TotalValue<br>
     		For each iteration<br>
-    		&nbsp;&nbsp;For each polygon<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Calculate area and centroid (using current boundaries)<br>
-    		&nbsp;&nbsp;Sum areas into TotalArea<br>
-    		&nbsp;&nbsp;For each polygon<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Desired = (TotalArea*(PolygonValue/TotalValue))<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Radius = SquareRoot(Area/pi)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Mass = SquareRoot(Desired/pi) - SquareRoot(Area/pi)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;SizeError = Max(Area,Desired)/Min(Area,Desired)<br>
-    		&nbsp;&nbsp;ForceReductionFactor = 1/(1+Mean(SizeError))<br>
-    		&nbsp;&nbsp;For each Boundary line; Read coordinate chain<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;For each coordinate pair<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each polygon centroid<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find angle, Distance from centroid to coordinate<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If (Distance > Radius of polygon)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Radius/Distance)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Else<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Distance^2 / Radius^2) * (4 - 3 * (Distance / Radius))<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using F_ij and angels, calculate vector sum<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiply by ForceReductionFactor<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move coordinate accordingly<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Write distorted line to output and plot result<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate area and centroid (using current boundaries)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum areas into TotalArea<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desired = (TotalArea*(PolygonValue/TotalValue))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Radius = SquareRoot(Area/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mass = SquareRoot(Desired/pi) - SquareRoot(Area/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SizeError = Max(Area,Desired)/Min(Area,Desired)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;ForceReductionFactor = 1/(1+Mean(SizeError))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each Boundary line; Read coordinate chain<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each coordinate pair<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each polygon centroid<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find angle, Distance from centroid to coordinate<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If (Distance > Radius of polygon)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Radius/Distance)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Else<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Distance^2 / Radius^2) * (4 - 3 * (Distance / Radius))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using F_ij and angels, calculate vector sum<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiply by ForceReductionFactor<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move coordinate accordingly<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write distorted line to output and plot result
     	</p>
     </div>
     <div class="contents">
