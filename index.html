@@ -81,6 +81,12 @@
 
         .contents {
             width: 1200px;
+            margin: 15px 0 15px 0;
+            font-size: .9em;
+        }
+
+        #Instructions{
+            width: 1200px;
             margin: 50px 0 15px 0;
             font-size: .9em;
         }
@@ -166,7 +172,7 @@
         	color: #FFFFFF;
         }
 
-        #button_start{
+        .command_button{
             border: 0 none;
             width: 72px;
             border-radius: 5px;
@@ -177,43 +183,17 @@
             font-size: 14px;
             text-transform: none;
             -webkit-transition: all 100ms ease-in-out;
-            transition: all 100ms ease-in-out;
-            background: #636363;
-            color: #ffffff;
+            transition: all 100ms ease-in-out; 
+            color: #fff;
         }
 
-        #button_stop{
-        	border: 0 none;
-            width: 72px;
-            border-radius: 5px;
-            padding: 5px 0px;
-            margin: 0 10px;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 14px;
-            text-transform: none;
-            -webkit-transition: all 100ms ease-in-out;
-            transition: all 100ms ease-in-out;
-            background: #636363;
-            color: #ffffff;
-
+        .command_button:hover {
+            opacity: .7;
         }
 
-        #button_reset{
-            border: 0 none;
-            width: 72px;
-            border-radius: 5px;
-            padding: 5px 0px;
-            margin: 0 10px;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 14px;
-            text-transform: none;
-            -webkit-transition: all 100ms ease-in-out;
-            transition: all 100ms ease-in-out;
+        .command_button.-change{
             background: #636363;
             color: #ffffff;
-
         }
 
         .svg .text{
@@ -236,6 +216,14 @@
             stroke: #000;
         }
 
+        th{
+            text-align: left;
+        }
+
+        table{
+            border-collapse: collapse;
+        }
+
     </style>
     
 </head>
@@ -249,10 +237,9 @@
        <button  class = "button -blue">Energy Consumption</button>
        <button  class = "button -green"> CO2 Emission </button>
     </div> 
-
-    	<button id = "button_start"> Start </button>
-    	<button id = "button_stop"> Stop </button>
-        <button id = "button_reset"> Reset </button>
+    	<button class = "command_button -change" id = "button_start"> Start </button>
+    	<button class = "command_button -change" id = "button_stop"> Stop </button>
+        <button class = "command_button -change" id = "button_reset"> Reset </button>
     <div id="map-container">
         
         <svg id="map"></svg>
@@ -264,51 +251,106 @@
         <div id = "axis-container">
         </div>
     </div>
-
     <div class="contents" id="Instructions">
-    	<p>Instructions: Click on the timeline to switch between different years. Click "Start" to start animation and click "Stop" to stop animation. Hover mouse on countries on the map to see the detailed number. Use category buttons to see different data. </p>
+    	<p>Instructions: Click on the timeline to switch between different years. Click "Start" to start animation, click "Stop" to stop animation and click "Reset" to see the original map. Hover mouse on countries on the map to see the detailed number. Use category buttons to see different data. </p>
     </div>
-
     <div class="contents" id="Cartogram_explanation">
     	<h2>Cartogram</h2>
     	<p>
-    	 	According to Wikipedia, "cartogram is a map in which some thematic mapping variable - such as travel time, population, or Gross National Product - is substituted for land area or distance. Cartograms have a fairly long history, with examples form the mid-1800s. ". 
+    	 	According to Wikipedia, "cartogram is a map in which some thematic mapping variable - such as travel time, population, or Gross National Product - is substituted for land area or distance. Cartograms have a fairly long history, with examples form the mid-1800s. ". Although there are rich literature about cartogram, the one used in this visualization is <a href="http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf">an algoritm to construct continuous area cartograms</a> by James A. Dougenik, Nicholas R. Chrisman and Duane R. Niemeyer, ©1985 by the Association of American Geographers. The basic procedure for producing cartograms, as indicated in the paper, employs a brute force method - the forces of all polygons act upon every boundary coordinate. This approach is shown below:
     	</p>
-    	<p>
-    		Although there are rich literature about cartogram, the one used in this visualization is <a href="http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf">an algoritm to construct continuous area cartograms</a> by James A. Dougenik, Nicholas R. Chrisman and Duane R. Niemeyer, ©1985 by the Association of American Geographers. The basic procedure for producing cartograms, as indicated in the paper, employs a brute force method - the forces of all polygons act upon every boundary coordinate. This approach is shown below:
-    	</p>
-    	<p>
+    	<code>
     		For each polygon <br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Read and store PolygonValue (negative value illegal)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Sum PolygonValue into TotalValue<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Read and store <var>PolygonValue</var> (negative value illegal)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum <var>PolygonValue</var> into <var>TotalValue</var><br>
     		For each iteration<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate area and centroid (using current boundaries)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;Sum areas into TotalArea<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate <var>area</var> and <var>centroid</var> (using current boundaries)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum <var>areas</var> into <var>TotalArea</var><br>
     		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desired = (TotalArea*(PolygonValue/TotalValue))<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Radius = SquareRoot(Area/pi)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mass = SquareRoot(Desired/pi) - SquareRoot(Area/pi)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SizeError = Max(Area,Desired)/Min(Area,Desired)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;ForceReductionFactor = 1/(1+Mean(SizeError))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Desired</var> = (<var>TotalArea</var>*(<var>PolygonValue</var>/<var>TotalValue</var>))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Radius</var> = SquareRoot(<var>Area</var>/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Mass</var> = SquareRoot(<var>Desired</var>/pi) - SquareRoot(<var>Area</var>/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>SizeError</var> = Max(<var>Area</var>,<var>Desired</var>)/Min(<var>Area</var>,<var>Desired</var>)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;<var>ForceReductionFactor</var> = 1/(1+Mean(<var>SizeError</var>))<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;For each Boundary line; Read coordinate chain<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each coordinate pair<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each polygon centroid<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find angle, Distance from centroid to coordinate<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If (Distance > Radius of polygon)<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Radius/Distance)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find <var>angle</var>, <var>Distance</var> from centroid to coordinate<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If (<var>Distance</var> > <var>Radius</var> of polygon)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>F_ij</var> = <var>Mass</var> * (<var>Radius</var>/<var>Distance</var>)<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Else<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F_ij = Mass * (Distance^2 / Radius^2) * (4 - 3 * (Distance / Radius))<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using F_ij and angels, calculate vector sum<br>
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiply by ForceReductionFactor<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>F_ij</var> = <var>Mass</var> * (<var>Distance</var>^2 / <var>Radius</var>^2) * (4 - 3 * (<var>Distance</var> / <var>Radius</var>))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using <var>F_ij</var> and <var>angels</var>, calculate vector sum<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiply by <var>ForceReductionFactor</var><br>
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move coordinate accordingly<br>
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write distorted line to output and plot result
-    	</p>
+    	</code>
+        <h2>Data</h2>
+        <p>
+            The data are originally from <i>IEA World Energy Outlook 2014</i> and <i>IEA World Energy Statistics and Balances </i> or interpolated using linear interpolation. The table below shows the source of the data:<br>
+            Energy Consumption and CO2 Emission:
+            <table style = "width:50%" align="center" border = "1">
+                <tr>
+                    <th></th>
+                    <th> Brazil, China, Japan, Russia and US </th>
+                    <th> Other 134 countries included in IEA report </th>
+                    <th> The rest of the world </th>
+                </tr>
+                <tr>
+                    <th> 1971 - 2012 </th>
+                    <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
+                    <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
+                    <th> Assumed 0 </th>
+                </tr>
+                <tr>
+                    <th> 2020, 2025, 2030, 2035, 2040</th>
+                    <th> From <i>IEA World Energy Outlook 2014</i> using "New Policies" scenario forecasts</th>
+                    <th> Interpolated by continents' data from "New Policies" scenario forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</th>
+                    <th> Assumed 0 </th>
+                </tr>
+                <tr>
+                    <th> Other years</th>
+                    <th> Linear interpolated using other data </th>
+                    <th> Linear interpolated using other data </th>
+                    <th> Assumed 0 </th>
+                </tr>
+            </table>
+            Population and GDP PPP (GDP based on purchasing power parity):
+            <table style = "width:50%" align="center" border = "1">
+                <tr>
+                    <th></th>
+                    <th> Brazil, China, Japan, Russia and US </th>
+                    <th> Other 134 countries included in IEA report </th>
+                    <th> The rest of the world </th>
+                </tr>
+                <tr>
+                    <th> 1971 - 2012 </th>
+                    <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
+                    <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
+                    <th> Assumed 0 </th>
+                </tr>
+                <tr>
+                    <th> 2040</th>
+                    <th> From <i>IEA World Energy Outlook 2014</i> forecasts</th>
+                    <th> Interpolated by continents' data from forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</th>
+                    <th> Assumed 0 </th>
+                </tr>
+                <tr>
+                    <th> Other years</th>
+                    <th> Linear interpolated using other data </th>
+                    <th> Linear interpolated using other data </th>
+                    <th> Assumed 0 </th>
+                </tr>
+            </table>
+            Data of Soviet Union Countries before 1990 are interpolated using individual country's share in 1990. The detailed information of country categories can be found in the Appendix of <i>IEA World Energy Outlook 2014</i>. The categories we used to divide countries are: Africa, Latin America, Middle East, OECD Europe, OECD Asia Oceania, Non-OECD Asia, Eastern Europe/Eurasia. 
+        </p>
+
     </div>
     <div class="contents">
         <h2>About</h2>
         <p>
-            This map is produced by Mengyang Lin using d3.js and cartogram.js. The data are from IEA World Energy Outlook 2014 and IEA World Energy Statistics and Balances. The code was adapted from the example provided by shawnbot and jalperin. The color is from colorbrewer.
+            This map is produced by Mengyang Lin using <a href = "http://d3js.org/">d3.js</a> and <a href="http://prag.ma/code/d3-cartogram/cartogram.js">cartogram.js</a>. The code was adapted from the example provided by <a href="https://github.com/shawnbot">shawnbot</a> and <a href="https://github.com/jalperin/d3-cartogram">jalperin</a>. The color is from colorbrewer.
         </p>
      </div>
     <script src="lib/d3.min.js"></script>
@@ -324,8 +366,6 @@
         if (!document.createElementNS) {
             document.getElementsByTagName("form")[0].style.display = "none";
         };
-        
-       // energyData();
     </script>
     
 </body>
