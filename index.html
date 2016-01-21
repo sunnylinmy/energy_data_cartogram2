@@ -58,18 +58,6 @@
             font-size: 120%;
         }
 
-        select {
-            font-size: inherit;
-        }
-
-        #placeholder {
-            position: absolute;
-            z-index: -1;
-            display: block;
-            left: 0;
-            top: 0;
-        }
-
         #theyear {
             line-height: 0.4em;
             border: 1px;
@@ -91,13 +79,6 @@
             font-size: .9em;
         }
 
-        #credits {
-            position: absolute;
-            bottom: 10px;
-            right: 0px;
-            font-size: 1em;
-        }
-        
         body {
             background: white;
             font-family: 'Roboto', sans-serif;
@@ -222,6 +203,10 @@
 
         table{
             border-collapse: collapse;
+            table-layout:fixed;
+            width:20px;
+            font-size: 0.9em;
+            font-family: sans-serif;
         }
 
     </style>
@@ -292,58 +277,60 @@
             Energy Consumption and CO2 Emission:
             <table style = "width:50%" align="center" border = "1">
                 <tr>
-                    <th></th>
+                    <th style = "width: 80px"></th>
                     <th> Brazil, China, Japan, Russia and US </th>
                     <th> Other 134 countries included in IEA report </th>
                     <th> The rest of the world </th>
                 </tr>
                 <tr>
-                    <th> 1971 - 2012 </th>
+                    <th style = "width: 80px"> 1971 - 2012 </th>
                     <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
                     <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
                     <th> Assumed 0 </th>
                 </tr>
                 <tr>
-                    <th> 2020, 2025, 2030, 2035, 2040</th>
+                    <th style = "width: 80px"> 2020, 2025, 2030, 2035, 2040</th>
                     <th> From <i>IEA World Energy Outlook 2014</i> using "New Policies" scenario forecasts</th>
                     <th> Interpolated by continents' data from "New Policies" scenario forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</th>
                     <th> Assumed 0 </th>
                 </tr>
                 <tr>
-                    <th> Other years</th>
+                    <th style = "width: 80px"> Other years</th>
                     <th> Linear interpolated using other data </th>
                     <th> Linear interpolated using other data </th>
                     <th> Assumed 0 </th>
                 </tr>
             </table>
-            Population and GDP PPP (GDP based on purchasing power parity):
+            <br>
+            Population and GDP PPP (GDP based on purchasing power parity): <br>
+            <br>
             <table style = "width:50%" align="center" border = "1">
                 <tr>
-                    <th></th>
+                    <th style = "width: 80px"></th>
                     <th> Brazil, China, Japan, Russia and US </th>
                     <th> Other 134 countries included in IEA report </th>
                     <th> The rest of the world </th>
                 </tr>
                 <tr>
-                    <th> 1971 - 2012 </th>
+                    <th style = "width: 80px"> 1971 - 2012 </th>
                     <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
                     <th> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></th>
                     <th> Assumed 0 </th>
                 </tr>
                 <tr>
-                    <th> 2040</th>
+                    <th style = "width: 80px"> 2040</th>
                     <th> From <i>IEA World Energy Outlook 2014</i> forecasts</th>
                     <th> Interpolated by continents' data from forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</th>
                     <th> Assumed 0 </th>
                 </tr>
                 <tr>
-                    <th> Other years</th>
+                    <th style = "width: 80px"> Other years</th>
                     <th> Linear interpolated using other data </th>
                     <th> Linear interpolated using other data </th>
                     <th> Assumed 0 </th>
                 </tr>
-            </table>
-            Data of Soviet Union Countries before 1990 are interpolated using individual country's share in 1990. The detailed information of country categories can be found in the Appendix of <i>IEA World Energy Outlook 2014</i>. The categories we used to divide countries are: Africa, Latin America, Middle East, OECD Europe, OECD Asia Oceania, Non-OECD Asia, Eastern Europe/Eurasia. 
+            </table><br>
+            Data of Soviet Union countries before 1990 are interpolated using individual country's share in 1990. The detailed information of country categories can be found in the Appendix of <i>IEA World Energy Outlook 2014</i>. The categories we used to divide countries are: Africa, Latin America, Middle East, OECD Europe, OECD Asia Oceania, Non-OECD Asia, Eastern Europe/Eurasia. 
         </p>
 
     </div>
