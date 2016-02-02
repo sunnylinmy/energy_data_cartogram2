@@ -150,18 +150,25 @@
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
-            display: flex;
+            display: relative;
             -webkit-box-pack: justify;
             -webkit-justify-content: space-between;
             -ms-flex-pack: justify;
             justify-content: space-between;
-            align-item: center;
-            width: 150px;
+            width: 15%;
+            margin: 10px auto;
         }
 
-        .command_button{
+        .command_button.-change:hover {
+            opacity: .7;
+            background: #636363;
+            color: #ffffff ;
+        }
+
+
+
+        .command_button.-change{
             border: 0 none;
-            width: 30%;
             border-radius: 20px;
             padding: 5px 0px;
             margin: 0 2px;
@@ -171,18 +178,9 @@
             text-transform: none;
             -webkit-transition: all 100ms ease-in-out;
             transition: all 100ms ease-in-out; 
-            color: #fff;
-        }
-
-        .command_button.-change:hover {
-            opacity: .7;
-            background: #636363;
-            color: #ffffff ;
-        }
-
-        .command_button.-change{
             background: #f0f0f0;
             color: #000000;
+            width: 30%;
         }
 
         .svg .text{
@@ -234,7 +232,7 @@
        <button  class = "button -blue">Energy Consumption</button>
        <button  class = "button -green"> CO2 Emission </button>
     </div> 
-    <div class = "command-button-container">
+    <div class = "command_button_container">
     	<button class = "command_button -change" id = "button_start"> Start </button>
     	<button class = "command_button -change" id = "button_stop"> Stop </button>
         <button class = "command_button -change" id = "button_reset"> Reset </button>
