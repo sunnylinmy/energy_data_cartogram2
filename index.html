@@ -7,7 +7,10 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <style type="text/css">
         #container {
-            width: 1200px;
+            max-width: 1200px;
+            max-height: 600px;
+            height: 62.5%;
+            width: 62.5%;
             margin: 20px auto;
         }
 
@@ -29,8 +32,10 @@
 
 
         #map-container {
-            width: 1200px;
-            height: 600px;
+            max-width: 1200px;
+            width:100%;
+            max-height: 600px;
+            height: 100%;
             text-align: center;
             position: relative;
             margin: 0px 0;
@@ -41,7 +46,7 @@
             position: relative;
             background: #fff;
             width: 100%;
-            height: 100%;
+            height:100%;
             margin: 0;
         }
 
@@ -65,16 +70,19 @@
             position: absolute;
             bottom: -12px;
             right: 0px;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .contents {
-            width: 1200px;
+            width: 100%;
             margin: 15px 0 15px 0;
             font-size: .9em;
         }
 
         #Instructions{
-            width: 1200px;
+            max-width: 1200px;
+            width:100%;
             margin: 50px 0 15px 0;
             font-size: .9em;
         }
@@ -86,21 +94,6 @@
             height: 100vh;
         }
 
-
-        .container {
-            max-width: 300px;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-        }   
-
-
         .button-container {
             display: -webkit-box;
             display: -webkit-flex;
@@ -110,7 +103,7 @@
             -webkit-justify-content: space-between;
             -ms-flex-pack: justify;
             justify-content: space-between;
-            width: 600px;
+            width: 50%;
             margin: 10px auto;
         }
 
@@ -153,12 +146,25 @@
         	color: #FFFFFF;
         }
 
+        .command_button_container{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            align-item: center;
+            width: 150px;
+        }
+
         .command_button{
             border: 0 none;
-            width: 72px;
-            border-radius: 5px;
-            padding: 5px 20px;
-            margin: 0 10px;
+            width: 30%;
+            border-radius: 20px;
+            padding: 5px 0px;
+            margin: 0 2px;
             cursor: pointer;
             display: inline-block;
             font-size: 14px;
@@ -168,13 +174,15 @@
             color: #fff;
         }
 
-        .command_button:hover {
+        .command_button.-change:hover {
             opacity: .7;
+            background: #636363;
+            color: #ffffff ;
         }
 
         .command_button.-change{
-            background: #636363;
-            color: #ffffff;
+            background: #f0f0f0;
+            color: #000000;
         }
 
         .svg .text{
@@ -183,6 +191,8 @@
         }
 
         .axis-container{
+            max-width: 1200px;
+            width: 100%;
             margin-bottom: 40px;
         }
         
@@ -195,6 +205,8 @@
 
         .axis line {
             stroke: #000;
+            max-width: 1200px;
+            width: 100%;
         }
 
         th{
@@ -222,15 +234,17 @@
        <button  class = "button -blue">Energy Consumption</button>
        <button  class = "button -green"> CO2 Emission </button>
     </div> 
+    <div class = "command-button-container">
     	<button class = "command_button -change" id = "button_start"> Start </button>
     	<button class = "command_button -change" id = "button_stop"> Stop </button>
         <button class = "command_button -change" id = "button_reset"> Reset </button>
+    </div>
     <div id="map-container">
         
         <svg id="map"></svg>
         <div id="theyear">
             <span></span><br />
-            <input style="position:relative; width:1200px" type="range" min="1971" max="2040" value="1971">
+            <input style="position:relative; width:100%" type="range" min="1971" max="2040" value="1971">
         </div>
         <!--<div id = "slider"> -webkit-box-orient: vertical; </div>-->
         <div id = "axis-container">
@@ -341,11 +355,13 @@
         </p>
      </div>
     <script src="lib/d3.min.js"></script>
+    <script src="lib/jquery-1.12.0.min.js"></script> 
     <script src="lib/colorbrewer.js"></script>
     <script src="lib/topojson.js"></script>
     <script src="lib/cartogram.js"></script>
     <script src="lib/d3.geo.projection.v0.min.js" charset="utf-8"></script>
     <script src="lib/test.js"></script>
+
     <script>
         // hide the form if the browser doesn't do SVG,
         // (then just let everything else fail)
