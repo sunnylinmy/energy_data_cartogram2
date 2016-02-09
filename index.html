@@ -65,7 +65,7 @@
         }
 
         #theyear {
-            line-height: 0.4em;
+            line-height: 0.6em;
             border: 1px;
             font-size: 1.5em;
             position: absolute;
@@ -96,7 +96,8 @@
 
         .primary-button-container{
             width:100%;
-            height: 42px;
+            height: 46px;
+            display: inline-flex;
         }
 
         .button-container {
@@ -109,9 +110,8 @@
             -ms-flex-pack: justify;
             justify-content: space-between;
             width: 55%;
-            margin-left: 22.5%;
-            padding-bottom: 10px;
-            height: 42px;
+            margin-left: 22.5%; 
+            height: 46px;
         }
 
         .button {
@@ -126,7 +126,7 @@
             text-transform: none;
             -webkit-transition: all 100ms ease-in-out;
             transition: all 100ms ease-in-out;
-            height: 42px;
+            height: 46px;
             width: 150px;
             max-width: 150px;
         }
@@ -160,14 +160,22 @@
         }
 
         #radio_button_container{
-            display: inline;
+            display: inline-block;
+            margin-left: 10px;
         }
 
         #radio_button{
             size: 6px;
+            display: inline;
+        }
+
+        #radio_button_container span{
+            display: block;
+            width: 120px;
         }
 
         label{
+            display: inline;
             font-size: 12px;
         }
 
@@ -213,12 +221,11 @@
             text-align: center;
         }
 
-        .axis-container{
+        #axis-container{
             max-width: 1200px;
             width: 100%;
             margin-bottom: 40px;
-        }
-        
+        }        
 
         .axis path {
             fill: none;
