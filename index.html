@@ -2,19 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Primary Energy Consumption of the World</title>
+    <title>Energy Data of the World</title>
     <meta charset="utf-8">
-
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://d3js.org/d3.geo.projection.v0.min.js" charset="utf-8"></script>
-    <script src="lib/colorbrewer.js"></script>
-    <script src="lib/topojson.js"></script>
-    <script src="cartogram.js"></script>
-    <link rel="stylesheet" type="text/css" href="lib/d3.slider.css" media="screen" />
-    <script src="lib/d3.slider.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <style type="text/css">
         #container {
+            /*max-width: 1200px;
+            max-height: 600px;*/
+            /*height: 60%;
+            width: 62.5%;      Release this and make the web page responsive!*/  
+            height: 600px;
             width: 1200px;
             margin: 20px auto;
         }
@@ -31,14 +28,15 @@
         }
 
         p {
-           
             
         }
 
 
         #map-container {
-            width: 1200px;
-            height: 600px;
+            /*max-width: 1200px;
+            max-height: 600px;*/
+            width:100%;
+            height: 100%;
             text-align: center;
             position: relative;
             margin: 0px 0;
@@ -66,85 +64,61 @@
             font-size: 120%;
         }
 
-        select {
-            font-size: inherit;
-        }
-
-        #placeholder {
-            position: absolute;
-            z-index: -1;
-            display: block;
-            left: 0;
-            top: 0;
-        }
-
         #theyear {
-            line-height: 0.4em;
+            line-height: 0.6em;
             border: 1px;
-            font-size: 1em;
+            font-size: 1.5em;
             position: absolute;
             bottom: -12px;
             right: 0px;
+            /*max-width: 1200px;*/
+            width: 100%;
         }
 
-        #about {
-            width: 1200px;
+        .contents {
+            width: 100%;
+            margin: 15px 0 15px 0;
+            font-size: .9em;
+        }
+
+        #Instructions{
+            max-width: 1200px;
+            width:100%;
             margin: 50px 0 15px 0;
             font-size: .9em;
         }
 
-        #credits {
-            position: absolute;
-            bottom: 10px;
-            right: 0px;
-            font-size: 1em;
-        }
-        @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
         body {
             background: white;
             font-family: 'Roboto', sans-serif;
-            display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
-            align-items: center;
             height: 100vh;
         }
 
-       
-        .container {
-            max-width: 300px;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
+        .primary-button-container{
+            width:100%;
+            height: 46px;
+            display: inline-flex;
         }
 
         .button-container {
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
-            display: flex;
+            display: inline-flex;
             -webkit-box-pack: justify;
             -webkit-justify-content: space-between;
             -ms-flex-pack: justify;
             justify-content: space-between;
-            width: 450px;
-            margin: 10px auto;
+            width: 55%;
+            margin-left: 22.5%; 
+            height: 46px;
         }
 
         .button {
             border: 0 none;
             border-radius: 36px;
             padding: 5px 20px;
-            margin: 0 10px;
+            margin: 0 0px;
             cursor: pointer;
             display: inline-block;
             font-size: 14px;
@@ -152,7 +126,11 @@
             text-transform: none;
             -webkit-transition: all 100ms ease-in-out;
             transition: all 100ms ease-in-out;
+            height: 46px;
+            width: 150px;
+            max-width: 150px;
         }
+
         .button:hover {
             opacity: .7;
         }
@@ -160,16 +138,65 @@
         .button.-orange {
             background: #fdae6b;
             color: #FFFFFF;
+            display: inline;
         }
 
         .button.-green {
             background: #a1d99b;
             color: #FFFFFF;
+            display: inline;
         }
 
         .button.-blue {
             background: #9ecae1;
             color: #FFFFFF;
+            display: inline;
+        }
+
+        .button.-red{
+        	background: #ea4c4c;
+        	color: #FFFFFF;
+            display: inline;
+        }
+
+        .command_button_container{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: absolute;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            width: 25%;
+            margin: 10px auto;
+        }
+
+        .command_button.-change:hover {
+            opacity: .7;
+            background: #636363;
+            color: #ffffff ;
+        }
+
+        .command_button.-change{
+            border: 0 none;
+            border-radius: 20px;
+            padding: 5px 0px;
+            margin: 0 2px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: none;
+            -webkit-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out; 
+            background: #f0f0f0;
+            color: #000000;
+            width: 30%;
+        }
+
+        #command_text{
+            padding: 5px 0px;
+            margin: 0 2px;
         }
 
         .svg .text{
@@ -177,10 +204,11 @@
             text-align: center;
         }
 
-        .axis-container{
+        #axis-container{
+            max-width: 1200px;
+            width: 100%;
             margin-bottom: 40px;
-        }
-        
+        }        
 
         .axis path {
             fill: none;
@@ -190,37 +218,179 @@
 
         .axis line {
             stroke: #000;
+            /*max-width: 1200px;*/
+            width: 100%;
+        }
+
+        .layer{
+            text-align: center;
+        }
+
+        th{
+            text-align: left;
+        }
+
+        table{
+            border-collapse: collapse;
+            table-layout:fixed;
+            width:20px;
+            font-size: 0.9em;
+            font-family: sans-serif;
+        }
+
+        #colorbar.tick{
+            font-size: 12px;
+        }
+
+        .colorbar{
+            font-size: 12px;
         }
 
     </style>
+    
 </head>
-<body onload="window.fullyLoaded=true;">
+<body>
+
 <div id="container">
     <h1>Energy Data of the World</h1>
-    <div class = "button-container">
-       <button onclick="gdpData()" class = "button -orange">   GDP PPP   </button>
-       <button onclick="energyData()" class = "button -blue">Energy Consumption</button>
-       <button onclick="carbonData()" class = "button -green"> CO2 Emission </button>
+    <div class = "primary-button-container">
+        <div class = "button-container">
+            <button  class = "button -green"> Carbon Dioxide Emission </button>
+            <button  class = "button -blue">Energy Consumption</button>
+            <button  class = "button -orange">Gross Domestic Product</button>
+            <button  class = "button -red">Population</button>
+        </div>
+    </div> 
+    <div class = "command_button_container">
+        <span id = "command_text">Timeline:&nbsp;</span>
+    	<button class = "command_button -change" id = "button_start"> Play </button>
+    	<button class = "command_button -change" id = "button_stop"> Stop </button>
+        <button class = "command_button -change" id = "button_reset"> Reset </button>
     </div>
-
     <div id="map-container">
         
         <svg id="map"></svg>
         <div id="theyear">
             <span></span><br />
-            <input style="position:relative; width:1200px" type="range" min="1971" max="2040" value="1971">
+            <input style="position:relative; width:100%" type="range" min="1971" max="2040" value="1971">
         </div>
-        <!--<div id = "slider"></div>-->
+        <!--<div id = "slider"> -webkit-box-orient: vertical; </div>-->
         <div id = "axis-container">
         </div>
     </div>
-    <div id="about">
+    <div class="contents" id="Instructions">
+    	<p>Instructions: Click on the timeline to switch between different years. Click "Start" to start animation, click "Stop" to stop animation and click "Reset" to see the original map. Hover mouse on countries on the map to see the detailed number. Use category buttons to see different data. </p>
+    </div>
+    <div class="contents" id="Cartogram_explanation">
+    	<h2>Cartogram</h2>
+    	<p>
+    	 	According to Wikipedia, "cartogram is a map in which some thematic mapping variable - such as travel time, population, or Gross National Product - is substituted for land area or distance. Cartograms have a fairly long history, with examples form the mid-1800s. ". Although there are rich literature about cartogram, the one used in this visualization is <a href="http://lambert.nico.free.fr/tp/biblio/Dougeniketal1985.pdf">an algoritm to construct continuous area cartograms</a> by James A. Dougenik, Nicholas R. Chrisman and Duane R. Niemeyer, ©1985 by the Association of American Geographers. The basic procedure for producing cartograms, as indicated in the paper, employs a brute force method - the forces of all polygons act upon every boundary coordinate. This approach is shown below:
+    	</p>
+    	<code>
+    		For each polygon <br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Read and store <var>PolygonValue</var> (negative value illegal)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum <var>PolygonValue</var> into <var>TotalValue</var><br>
+    		For each iteration<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculate <var>area</var> and <var>centroid</var> (using current boundaries)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;Sum <var>areas</var> into <var>TotalArea</var><br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each polygon<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Desired</var> = (<var>TotalArea</var>*(<var>PolygonValue</var>/<var>TotalValue</var>))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Radius</var> = SquareRoot(<var>Area</var>/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>Mass</var> = SquareRoot(<var>Desired</var>/pi) - SquareRoot(<var>Area</var>/pi)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>SizeError</var> = Max(<var>Area</var>,<var>Desired</var>)/Min(<var>Area</var>,<var>Desired</var>)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;<var>ForceReductionFactor</var> = 1/(1+Mean(<var>SizeError</var>))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;For each Boundary line; Read coordinate chain<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each coordinate pair<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For each polygon centroid<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find <var>angle</var>, <var>Distance</var> from centroid to coordinate<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If (<var>Distance</var> > <var>Radius</var> of polygon)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>F_ij</var> = <var>Mass</var> * (<var>Radius</var>/<var>Distance</var>)<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Else<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>F_ij</var> = <var>Mass</var> * (<var>Distance</var>^2 / <var>Radius</var>^2) * (4 - 3 * (<var>Distance</var> / <var>Radius</var>))<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using <var>F_ij</var> and <var>angels</var>, calculate vector sum<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiply by <var>ForceReductionFactor</var><br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move coordinate accordingly<br>
+    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write distorted line to output and plot result
+    	</code>
+        <h2>Data</h2>
+        <p>
+            The data are originally from <i>IEA World Energy Outlook 2014</i> and <i>IEA World Energy Statistics and Balances </i> or interpolated using linear interpolation. The table below shows the source of the data:<br>
+            Energy Consumption and CO2 Emission:
+            <table style = "width:50%" align="center" border = "1">
+                <tr>
+                    <th style = "width: 80px"></th>
+                    <th> Brazil, China, Japan, Russia and US </th>
+                    <th> Other 134 countries included in IEA report </th>
+                    <th> The rest of the world </th>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> 1971 - 2012 </th>
+                    <td> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></td>
+                    <td> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></td>
+                    <td> Assumed 0 </td>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> 2020, 2025, 2030, 2035, 2040</th>
+                    <td> From <i>IEA World Energy Outlook 2014</i> using "New Policies" scenario forecasts</td>
+                    <td> Interpolated by continents' data from "New Policies" scenario forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</td>
+                    <td> Assumed 0 </td>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> Other years</th>
+                    <td> Linear interpolated using other data </td>
+                    <td> Linear interpolated using other data </td>
+                    <td> Assumed 0 </td>
+                </tr>
+            </table>
+            <br>
+            Population and GDP PPP (GDP based on purchasing power parity): <br>
+            <br>
+            <table style = "width:50%" align="center" border = "1">
+                <tr>
+                    <th style = "width: 80px"></th>
+                    <th> Brazil, China, Japan, Russia and US </th>
+                    <th> Other 134 countries included in IEA report </th>
+                    <th> The rest of the world </th>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> 1971 - 2012 </th>
+                    <td> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></td>
+                    <td> From <i>IEA World Energy Statistics and Balances (2014 edition)</i></td>
+                    <td> Assumed 0 </td>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> 2040</th>
+                    <td> From <i>IEA World Energy Outlook 2014</i> forecasts</td>
+                    <td> Interpolated by continents' data from forecasts of <i>IEA World Energy Outlook 2014</i> and individual country's share in 2012</td>
+                    <td> Assumed 0 </td>
+                </tr>
+                <tr>
+                    <th style = "width: 80px"> Other years</th>
+                    <td> Linear interpolated using other data </td>
+                    <td> Linear interpolated using other data </td>
+                    <td> Assumed 0 </td>
+                </tr>
+            </table><br>
+            Data of Soviet Union countries before 1990 are interpolated using individual country's share in 1990. The detailed information of country categories can be found in the Appendix of <i>IEA World Energy Outlook 2014</i>. The categories we used to divide countries are: Africa, Latin America, Middle East, OECD Europe, OECD Asia Oceania, Non-OECD Asia, Eastern Europe/Eurasia. 
+        </p>
+
+    </div>
+    <div class="contents">
         <h2>About</h2>
         <p>
-            This map is produced by Mengyang Lin using d3.js and cartogram.js. The data are from IEA World Energy Outlook 2014 and IEA World Energy Statistics and Balances. The code was adapted from the example provided by shawnbot and jalperin. The color is from colorbrewer.
+            This map is produced by Mengyang Lin using <a href = "http://d3js.org/">d3.js</a> and <a href="http://prag.ma/code/d3-cartogram/cartogram.js">cartogram.js</a>. The code was adapted from the example provided by <a href="https://github.com/shawnbot">shawnbot</a> and <a href="https://github.com/jalperin/d3-cartogram">jalperin</a>. The color is from colorbrewer.
         </p>
      </div>
-    <script src="lib/mycartogram2.js"></script>
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/jquery-1.12.0.min.js"></script> 
+    <script src="lib/colorbrewer.js"></script>
+    <script src="lib/topojson.js"></script>
+    <script src="lib/cartogram.js"></script>
+    <script src="lib/d3.geo.projection.v0.min.js" charset="utf-8"></script>
+    <script src="lib/colorbar.js"></script>
+    <script src="lib/test.js"></script>
+
     <script>
         // hide the form if the browser doesn't do SVG,
         // (then just let everything else fail)
@@ -228,7 +398,6 @@
         if (!document.createElementNS) {
             document.getElementsByTagName("form")[0].style.display = "none";
         };
-        energyData();
     </script>
     
 </body>
